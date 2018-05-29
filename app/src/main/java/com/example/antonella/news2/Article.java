@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package com.example.antonella.news1;
+package com.example.antonella.news2;
 
 /**
  * custom class that is the model for the single item to show
@@ -27,11 +27,11 @@ package com.example.antonella.news1;
 
 class Article {
 
-    private String aTitle;
-    private String aSection;
-    private String aAuthor;
-    private String aPublicationDate;
-    private String aWebUrl;
+    private final String aTitle;
+    private final String aSection;
+    private final String aAuthor;
+    private final String aPublicationDate;
+    private final String aWebUrl;
 
     /**
      * Constructs a new {@link Article} object.

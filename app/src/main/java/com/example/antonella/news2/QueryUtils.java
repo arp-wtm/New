@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package com.example.antonella.news1;
+package com.example.antonella.news2;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -81,7 +81,7 @@ final class QueryUtils {
             Log.i(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-         // Return the list of news {@link Article}s extracted from the JSON response
+        // Return the list of news {@link Article}s extracted from the JSON response
         return extractNewsFromJson(jsonResponse);
 
     }
@@ -128,7 +128,7 @@ final class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the news JSON results.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -150,7 +150,8 @@ final class QueryUtils {
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader reader = new BufferedReader(inputStreamReader);
             String line = reader.readLine();
             while (line != null) {
@@ -174,6 +175,7 @@ final class QueryUtils {
         // Create an empty ArrayList news that we can start adding articles to
         List<Article> news = new ArrayList<>();
 
+        String author = "missed author";
         // Try to parse the JSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
@@ -192,7 +194,7 @@ final class QueryUtils {
             // For each article in the newsArray, create an {@link Article} object
             for (int i = 0; i < newsArray.length(); i++) {
 
-                // Get a single article at position i within the result array jsonobject
+                // Get a single article at position i within the result array news
                 JSONObject currentArticle = newsArray.getJSONObject(i);
 
                 // extract the the value for the key called "webTitle"
@@ -202,20 +204,25 @@ final class QueryUtils {
                 // Extract the value for the key called "sectionName"
                 String section = currentArticle.getString("sectionName");
 
-                // Extract the value for the author from the field tags and key called "webTitle"
+                // Extract the "tags" array from
+                // current article
                 JSONArray tags = currentArticle.getJSONArray("tags");
-                // set currentTag as the first JSONObject contributor
-                JSONObject currentTag = tags.getJSONObject(0);
-                // Extract the value for the author from the current tag with key called "webTitle"
-                String author = currentTag.optString("webTitle");
+
+
+                // if is present, extract the value for the author from
+                // the current tag with key called "webTitle"
+                if (tags.length() > 0 ) {
+                    author = tags.getJSONObject(0).getString("webTitle");
+                }
 
                 // Extract the value for the key called "time"
-                String date = currentArticle.optString("webPublicationDate");
+                String date = currentArticle.getString("webPublicationDate");
 
                 // Extract the value for the key called "url"
                 String url = currentArticle.getString("webUrl");
                 // Create a new {@link Article} object with title,section,author,date
                 // and url from the JSON response.
+
                 Article article = new Article(title, section, author, date, url);
 
                 // Add the new {@link article} to the list of news.
@@ -226,7 +233,7 @@ final class QueryUtils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the news JSON results", e);
         }
 
         // Return the list of articles

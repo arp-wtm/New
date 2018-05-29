@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package com.example.antonella.news1;
+package com.example.antonella.news2;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
@@ -34,7 +34,7 @@ class NewsLoader extends AsyncTaskLoader<List<Article>> {
     /**
      * Query URL to find news articles
      */
-    private String newsUrl;
+    private final String newsUrl;
 
     /**
      * Constructs a new {@link NewsLoader}.
@@ -61,6 +61,6 @@ class NewsLoader extends AsyncTaskLoader<List<Article>> {
         if (newsUrl == null) return null;
 
         // Perform the network request, parse the response, and extract the news list.
-        return QueryUtils.fetchNewsData(newsUrl);
+        return com.example.antonella.news2.QueryUtils.fetchNewsData(newsUrl);
     }
 }

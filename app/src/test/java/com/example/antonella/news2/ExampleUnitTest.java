@@ -1,4 +1,4 @@
-package com.example.antonella.news1;
+package com.example.antonella.news2;
 
 import org.junit.Test;
 

@@ -1,6 +1,41 @@
 <resources>
-    <string name="app_name">NewsStage1</string>
-
+    <!-- Title for the application. [CHAR LIMIT=12] -->
+    <string name="app_name">News</string>
+    <!-- Text that is not displayed, used like article title placeholder in article layout -->
+    <string name="article_title">Article Title</string>
+    <!-- Text that is not displayed, used like section name placeholder in article layout -->
+    <string name="section_name">Section Name</string>
+    <!-- Text that is not displayed, used like Author name placeholder in article layout -->
+    <string name="author">Author</string>
+    <!-- Text that is not displayed, used like Date placeholder in article layout -->
+    <string name="date">Date</string>
+    <!-- Title for the settings menu item [CHAR LIMIT=12] -->
+    <string name="settings_menu_item">Settings</string>
+    <!-- Title for the settings screen. [CHAR LIMIT=12] -->
+    <string name="settings_title">News Settings</string>
+    <!-- Text to display in the center screen when there is no Internet connection -->
     <string name="no_internet_connection">internet connection problems, check your device settings </string>
+    <!-- Text to display in the center screen when there is no article found -->
     <string name="no_news">News data not found</string>
+
+
+    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order-by</string>
+    <string name="settings_order_by_default" translatable="false">newest</string>
+
+
+    <!-- Label for order-by most recent date option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_most_recent_label">Most Recent</string>
+    <string name="settings_order_by_most_recent_value" translatable="false">newest</string>
+
+    <!-- Label for order-by article title option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_relevance_label">Relevance</string>
+    <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
+
+    <!-- Label for order-by section name option [CHAR LIMIT=20] -->
+    <string name="settings_order_by_oldest_label">Oldest</string>
+    <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
+
+
 </resources>

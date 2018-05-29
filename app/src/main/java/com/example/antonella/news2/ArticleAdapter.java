@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package com.example.antonella.news1;
+package com.example.antonella.news2;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -36,7 +36,7 @@ import java.util.List;
  * to be displayed to the user.
  */
 
-public class ArticleAdapter extends ArrayAdapter<Article> {
+class ArticleAdapter extends ArrayAdapter<Article> {
     /**
      * Constructs a new {@link ArticleAdapter}.
      *
@@ -48,8 +48,8 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
     }
 
     /**
-     * Returns a list item view that displays information about the earthquake at the given position
-     * in the list of earthquakes.
+     * Returns a list item view that displays information about the article
+     * at the given position in the list newsData.
      */
     @NonNull
     @Override
@@ -73,10 +73,10 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
 
             // Find the TextView with view ID section_name
-            TextView sectioNameView = listItemView.findViewById(R.id.section_name);
+            TextView sectionNameView = listItemView.findViewById(R.id.section_name);
             // Display the location of the current article in that TextView
 
-            sectioNameView.setText(currentArticle.getSection());
+            sectionNameView.setText(currentArticle.getSection());
 
 
             // Find the TextView with view ID author

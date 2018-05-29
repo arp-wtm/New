@@ -20,17 +20,22 @@
  */
 
 
-package com.example.antonella.news1;
+package com.example.antonella.news2;
 
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -63,7 +68,7 @@ public class NewsActivity extends AppCompatActivity
     /**
      * to show a circle spinner running if connection is slow
      */
-    public ProgressBar newsProgress;
+    private ProgressBar newsProgress;
     /**
      * Adapter for the list of article
      */
@@ -125,13 +130,14 @@ public class NewsActivity extends AppCompatActivity
             }
         });
 
-        // Get a reference to the LoaderManager, in order to interact with loaders.
+        // Get a reference to the LoaderManager to interact with loaders.
         LoaderManager loaderManager = getLoaderManager();
 
         // control internet connectivity
 
         ConnectivityManager cm =
-                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) this.
+                        getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = null;
         if (cm != null) {
@@ -146,7 +152,7 @@ public class NewsActivity extends AppCompatActivity
         if (isConnected) {
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
         } else {
-            // Set empty state text to display "No earthquakes found."
+            // Set empty state text to display "internet connection problems found."
             newsEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
@@ -154,8 +160,31 @@ public class NewsActivity extends AppCompatActivity
 
     @Override
     public Loader<List<Article>> onCreateLoader(int id, Bundle args) {
-        // Create a new loader for the given URL
-        return new NewsLoader(this, REQUEST_URL);
+
+        SharedPreferences sharedPrefs = PreferenceManager.
+                getDefaultSharedPreferences(this);
+        // getString retrieves a String value from the preferences.
+        // The second parameter is the default value for this preference
+        String orderBy = sharedPrefs.getString(
+
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+
+        );
+        Log.i("NewsActivity", "view query string:" + orderBy);
+        // parse breaks apart the URI string that's passed into its parameter
+        Uri baseUri = Uri.parse(REQUEST_URL);
+
+        // buildUpon prepares the baseUri that we just parsed so we can add query parameters to it
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        // Append query parameter and its value.
+
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+
+        Log.i("NewsActivity", "request url:" + uriBuilder.toString());
+        // Create a new loader for the new query url
+        return new com.example.antonella.news2.NewsLoader(this, uriBuilder.toString());
 
     }
 
@@ -167,7 +196,7 @@ public class NewsActivity extends AppCompatActivity
         // Clear the adapter of previous news data
         aAdapter.clear();
 
-        // If there is a valid  news list of {@link Article}s, then add them to the adapter's
+        // If there is a valid  newsData list of {@link Article}s, it is added to the adapter's
         // data set. This will trigger the ListView to update.
         if (newsData != null && !newsData.isEmpty()) {
             // hide spinner progress bar
@@ -183,5 +212,24 @@ public class NewsActivity extends AppCompatActivity
         // Loader reset, so we can clear out our existing data.
         aAdapter.clear();
 
+    }
+    @Override
+    // This method initialize the contents of the Activity's options menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the Options Menu we specified in XML
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    // This method is called whenever an item in the options menu is selected.
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
