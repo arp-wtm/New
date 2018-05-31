@@ -6,7 +6,7 @@ Each list item on the main screen displays relevant text and information about t
 - Name of the section 
 - Name of the author (if present)
 - Date of publication
-All this informations are modeled with a custom class Article <br>
+All this information are modeled with a custom class Article <br>
 Clicking on a story uses an intent to open the story in the user’s browser.<br>
 When there is no data to display, the app shows a default TextView that informs the user with "no data news found".<br>
 The app checks whether the device is connected to the internet and responds appropriately. <br>
@@ -17,8 +17,8 @@ parse the response, and extract the news articles in background thread.<br>
 The Settings screen is for set preference of the user in displaying articles, 
 order by:
 newest,<br> oldest,<br> relevance.<br>
-Closing the app will mantain the preference choosen.<br>
-Return to main screen will update list with the new order setted by user.<br>
+Closing the app will maintain the preference chosen.<br>
+Return to main screen will update list with the new order set by user.<br>
 ## TEST
 The code runs without errors on HUAWEI JMM-L22 Android 7.0 Api 24.<br>
 The Android Project is built  for Phone and Tablet with LEVEL API 15: Android 4.0.3 (IceCreamSandwich)<br>
@@ -38,8 +38,8 @@ build.gradle dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 ```
-### LICENCE <br>
- made by Antonella on may.19.2018<br>
+### LICENCE 
+ made by Antonella on may.31.2018<br>
  for news stage 2 app exercise for project 7<br>
  in Udacity ABND course. It uses as model the<br>
  Quake Report app of the lesson on JSON Parsing and Settings Preference that is under this licence:<br>
