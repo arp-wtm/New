@@ -2,11 +2,11 @@
 UDACITY ABND project 7 <br>
 This app is created to display a list of news stories, given from the guardian site.<br>
 Each list item on the main screen displays relevant text and information about the story:<br>
-Title of news article <br>
-Name of the section <br>
-Name of the author<br>
-Date of publication <br>
-Alla this informations are modeled with a custom class Article <br>
+- Title of news article
+- Name of the section 
+- Name of the author (if present)
+- Date of publication
+All this informations are modeled with a custom class Article <br>
 Clicking on a story uses an intent to open the story in the user’s browser.<br>
 When there is no data to display, the app shows a default TextView that informs the user with "no data news found".<br>
 The app checks whether the device is connected to the internet and responds appropriately. <br>
@@ -19,23 +19,24 @@ order by:
 newest,<br> oldest,<br> relevance.<br>
 Closing the app will mantain the preference choosen.<br>
 Return to main screen will update list with the new order setted by user.<br>
-# TEST
-The code runs without errors on HAWEI JMM-L22 Android 7.0 Api 24.<br>
+## TEST
+The code runs without errors on HUAWEI JMM-L22 Android 7.0 Api 24.<br>
 The Android Project is built  for Phone and Tablet with LEVEL API 15: Android 4.0.3 (IceCreamSandwich)<br>
 in QueryUtils class there is some commented code that needs to test spinner progress bar.<br> 
 The message of no internet connection appares if you test the app in airplain mode.<br>
 During the text, for some query there was an error with index 0 out of array, when i try to parse the author name<br>
-from the JSONArray "tags". To resolve this problem I set the name of author to "missed author"  before try catch <br>
-and test if array has lenght > 0 before get the String "web Title" that contains the name of the author.<br> 
-build.gradle dependencies {<br>
-    implementation fileTree(dir: 'libs', include: ['*.jar'])<br>
-    implementation 'com.android.support:appcompat-v7:27.1.1'<br>
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'<br>
-    testImplementation 'junit:junit:4.12'<br>
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'<br>
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'<br>
-}<br>
-# LICENCE <br>
+from the JSONArray "tags". To resolve this problem  I use a parse in try catch, testing if array has lenght > 0 before get the String "web Title" that contains the name of the author.<br> If it return, I set the name of author to "missed author"
+```
+build.gradle dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+```
+## LICENCE <br>
 /*  made by Antonella on may.19.2018<br>
  * for news stage 2 app exercise for project 7<br>
  * in Udacity ABND course. It uses as model the<br>
