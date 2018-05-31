@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- dimensions for layout margin. -->
+    <dimen name="sixteen_margin">16dp</dimen>
+
+</resources>
