@@ -47,6 +47,14 @@ final class QueryUtils {
      * Tag for the log messages
      */
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
+    /**
+     * numeric values as static constants  to avoid Magic Numbers
+     */
+
+    private static final int REQUEST_OK = 200;
+    private static final int READ_TIME_OUT = 10000;
+    private static final int CONNECT_TIME_OUT = 15000;
+    // private static final int SLEEP_TIME= 2000;
 
     /**
      * Create a private constructor because no one should ever create a {@link QueryUtils} object.
@@ -63,7 +71,7 @@ final class QueryUtils {
 
         // comment and uncomment this code  to text the progress bar
         // try {
-        //    Thread.sleep(2000);
+        //    Thread.sleep(SLEEP_TIME);
         // } catch (InterruptedException e) {
         //    e.printStackTrace();
         // }
@@ -114,14 +122,14 @@ final class QueryUtils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(READ_TIME_OUT /* milliseconds */);
+            urlConnection.setConnectTimeout(CONNECT_TIME_OUT /* milliseconds */);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
             // If the request was successful (response code 200),
             // then read the input stream and parse the response.
-            if (urlConnection.getResponseCode() == 200) {
+            if (urlConnection.getResponseCode() == REQUEST_OK) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
@@ -175,7 +183,7 @@ final class QueryUtils {
         // Create an empty ArrayList news that we can start adding articles to
         List<Article> news = new ArrayList<>();
 
-        String author = "missed author";
+
         // Try to parse the JSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
@@ -211,9 +219,10 @@ final class QueryUtils {
 
                 // if is present, extract the value for the author from
                 // the current tag with key called "webTitle"
-                if (tags.length() > 0 ) {
+                String author;
+                if (tags.length() > 0) {
                     author = tags.getJSONObject(0).getString("webTitle");
-                }
+                } else author = "missed author";
 
                 // Extract the value for the key called "time"
                 String date = currentArticle.getString("webPublicationDate");
