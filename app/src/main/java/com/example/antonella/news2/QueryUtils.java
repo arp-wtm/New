@@ -35,12 +35,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Helper methods related to requesting and receiving article data from www.theguardian.com .
@@ -77,10 +77,12 @@ final class QueryUtils {
     private static String convertDate(String publishingDate) {
         if (publishingDate != null) {
             try {
+                SimpleDateFormat extendedDate =
+                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+                Date convertedDate = extendedDate.parse(publishingDate);
                 SimpleDateFormat shortDate =
-                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-                Date parsingDate = shortDate.parse(publishingDate);
-                return DateFormat.getDateInstance().format(parsingDate);
+                        new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                return shortDate.format(convertedDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
