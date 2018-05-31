@@ -23,39 +23,41 @@ Return to main screen will update list with the new order setted by user.<br>
 The code runs without errors on HUAWEI JMM-L22 Android 7.0 Api 24.<br>
 The Android Project is built  for Phone and Tablet with LEVEL API 15: Android 4.0.3 (IceCreamSandwich)<br>
 in QueryUtils class there is some commented code that needs to test spinner progress bar.<br> 
-The message of no internet connection appares if you test the app in airplain mode.<br>
+The message of no internet connection appeares if you test the app in airplaine mode.<br>
 During the text, for some query there was an error with index 0 out of array, when i try to parse the author name<br>
-from the JSONArray "tags". To resolve this problem  I use a parse in try catch, testing if array has lenght > 0 before get the String "web Title" that contains the name of the author.<br> If it return, I set the name of author to "missed author"
+from the JSONArray "tags". To resolve this problem  I use a parse in try catch, testing if array has length > 0 before get the String "web Title" that contains the name of the author.<br> If it return, I set the name of author to "missed author"
+### build 
 ```
 build.gradle dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 ```
-## LICENCE <br>
-/*  made by Antonella on may.19.2018<br>
- * for news stage 2 app exercise for project 7<br>
- * in Udacity ABND course. It uses as model the<br>
- * Quake Report app of the lesson on JSON Parsing and Settings Preference that is under this licence:<br>
- *<br>
- * Copyright (C) 2018 The Android Open Source Project<br>
- *<br>
- * Licensed under the Apache License, Version 2.0 (the "License");<br>
- * you may not use this file except in compliance with the License.<br>
- * You may obtain a copy of the License at<br>
- *<br>
- *      http://www.apache.org/licenses/LICENSE-2.0<br>
- *<br>
- * Unless required by applicable law or agreed to in writing, software<br>
- * distributed under the License is distributed on an "AS IS" BASIS,<br>
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br>
- * See the License for the specific language governing permissions and<br>
- * limitations under the License.<br>
- */<br>
+### LICENCE <br>
+ made by Antonella on may.19.2018<br>
+ for news stage 2 app exercise for project 7<br>
+ in Udacity ABND course. It uses as model the<br>
+ Quake Report app of the lesson on JSON Parsing and Settings Preference that is under this licence:<br>
+
+ Copyright (C) 2018 The Android Open Source Project<br>
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");<br>
+ you may not use this file except in compliance with the License.<br>
+ You may obtain a copy of the License at<br>
+ 
+      http://www.apache.org/licenses/LICENSE-2.0
+      
+ Unless required by applicable law or agreed to in writing, software<br>
+ distributed under the License is distributed on an "AS IS" BASIS,<br>
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br>
+ See the License for the specific language governing permissions and<br>
+ limitations under the License.
+
 
 All news displayed come from https://open-platform.theguardian.com <br>
 © 2016 Guardian News and Media Limited or its affiliated companies. All rights reserved.
