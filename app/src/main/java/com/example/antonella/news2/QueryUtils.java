@@ -35,7 +35,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,7 +66,29 @@ final class QueryUtils {
      * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
      */
     private QueryUtils() {
+
     }
+
+    /**
+     * get the date from the Guardian and convert it to new readable format
+     *
+     * @param publishingDate is the String value published
+     */
+    private static String convertDate(String publishingDate) {
+        if (publishingDate != null) {
+            try {
+                SimpleDateFormat shortDate =
+                        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+                Date parsingDate = shortDate.parse(publishingDate);
+                return DateFormat.getDateInstance().format(parsingDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return publishingDate;
+
+    }
+
 
     /**
      * Query the www.theguardian.com dataset and return a list of {@link Article} objects.
@@ -225,7 +251,7 @@ final class QueryUtils {
                 } else author = "missed author";
 
                 // Extract the value for the key called "time"
-                String date = currentArticle.getString("webPublicationDate");
+                String date = convertDate(currentArticle.getString("webPublicationDate"));
 
                 // Extract the value for the key called "url"
                 String url = currentArticle.getString("webUrl");
