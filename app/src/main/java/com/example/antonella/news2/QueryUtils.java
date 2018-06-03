@@ -249,11 +249,11 @@ final class QueryUtils {
                 // the current tag with key called "webTitle"
                 String author;
                 if (tags.length() > 0) {
-                    author = tags.getJSONObject(0).getString("webTitle");
+                    author = tags.getJSONObject(0).optString("webTitle");
                 } else author = "missed author";
 
                 // Extract the value for the key called "time"
-                String date = convertDate(currentArticle.getString("webPublicationDate"));
+                String date = convertDate(currentArticle.optString("webPublicationDate"));
 
                 // Extract the value for the key called "url"
                 String url = currentArticle.getString("webUrl");
